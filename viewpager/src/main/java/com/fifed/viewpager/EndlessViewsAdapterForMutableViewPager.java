@@ -26,11 +26,14 @@ public abstract class EndlessViewsAdapterForMutableViewPager extends PagerAdapte
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object view) {
-       container.removeView((View) view);
+        container.removeView((View) view);
     }
 
     @Override
     public int getCount() {
+        if(getCollectionCount() == 0){
+            return 0;
+        }
         return getCollectionCount() * (Integer.MAX_VALUE / getCollectionCount());
     }
 
@@ -40,6 +43,10 @@ public abstract class EndlessViewsAdapterForMutableViewPager extends PagerAdapte
     }
 
     public int getStartingItemToEndlessBothDirectScrolling(){
+        if(getCollectionCount() == 0){
+            return 0;
+        }
         return getCollectionCount() * (Integer.MAX_VALUE / getCollectionCount() / 2);
     }
 }
+
